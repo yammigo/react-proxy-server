@@ -1,0 +1,63 @@
+{
+    "name": "proxy-project",
+    "version": "1.0.0",
+    "description": "proxy-client",
+    "scripts": {
+        "dev": "webpack serve --config ./build/webpack.config.dev.js --node-env development",
+        "build": "webpack --config ./build/webpack.config.prod.js --node-env production",
+        "tailwindcss": "tailwindcss init",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@babel/cli": "^7.17.6",
+        "@babel/core": "^7.17.5",
+        "@babel/plugin-transform-runtime": "^7.17.0",
+        "@babel/polyfill": "^7.12.1",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-react": "^7.16.7",
+        "@babel/preset-typescript": "^7.16.7",
+        "@babel/runtime-corejs2": "^7.17.2",
+        "autoprefixer": "^10.4.2",
+        "babel-loader": "^8.2.3",
+        "core-js": "^2.6.12",
+        "css-loader": "^6.6.0",
+        "css-minimizer-webpack-plugin": "^3.4.1",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.5.0",
+        "mini-css-extract-plugin": "^2.6.0",
+        "node-sass": "^7.0.1",
+        "postcss": "^8.4.7",
+        "postcss-import": "^14.0.2",
+        "postcss-loader": "^6.2.1",
+        "postcss-preset-env": "^7.4.1",
+        "sass-loader": "^12.6.0",
+        "style-loader": "^3.3.1",
+        "tailwindcss": "^3.0.23",
+        "terser-webpack-plugin": "^5.3.1",
+        "thread-loader": "^3.0.4",
+        "ts-loader": "^9.2.7",
+        "url-loader": "^4.1.1",
+        "webpack": "^5.69.1",
+        "webpack-cli": "^4.9.2",
+        "webpack-dev-server": "^4.7.4",
+        "webpack-merge": "^5.8.0"
+    },
+    "dependencies": {
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-router-dom": "^6.2.2"
+    },
+    "browserslist": {
+        "production": [
+            ">0.1%, not dead"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version",
+            "last 1 ie version"
+        ]
+    }
+}

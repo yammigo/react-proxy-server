@@ -1,0 +1,34 @@
+{
+    "en": {
+        "butrun": "run server",
+        "proxyInput": "proxy host",
+        "proxyFolder": "static folder",
+        "requerHeader": "request headers",
+        "key": "key",
+        "clear": "clear",
+        "addGlobal": "add global params",
+        "addErrormsg": "current \"key\" Cannot be empty or repeated",
+        "aliasMsg": "global param",
+        "value": "value",
+        "disabled": "disabled",
+        "remove": "remove",
+        "enabled": "enabled",
+        "selectFolder": "select root file"
+    },
+    "zh_cn": {
+        "butrun": "运行服务",
+        "proxyFolder": "静态目录",
+        "requerHeader": "请求头",
+        "proxyInput": "代理地址",
+        "key": "键",
+        "clear": "清除",
+        "addGlobal": "添加全局参数",
+        "addErrormsg": "* 当前键名不能为空或者重复",
+        "aliasMsg": "全局参数",
+        "value": "值",
+        "disabled": "禁用",
+        "remove": "删除",
+        "enabled": "启用",
+        "selectFolder": "选择入口文件"
+    }
+}
