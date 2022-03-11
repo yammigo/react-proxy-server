@@ -14,24 +14,20 @@ const App=()=>{
     const currentThem =  window.localStorage.getItem("them")
     const currenLang = window.localStorage.getItem("lang")
     useLang(currenLang||"en")//激活语言选项
+    let [langConfig,setLangConfig]= useState({
+        lang:"en",
+        toggleLang:(arg)=>{
+           setLangConfig(arg)
+        }
+    });
     let [them,toggleThem]=useState(currentThem||"light")
     let [themConfig,setThemConfig]= useState({
          them,
          toggleThem
     })
-    let [langConfig,setLangConfig]= useState({
-         lang:"en",
-         toggleLang:(arg)=>{
-            setLangConfig(arg)
-         }
-    });
-
     useEffect(()=>{
-       setThemConfig({
-           them,
-           toggleThem
-       });
-       window.localStorage.setItem("them",them);
+        window.localStorage.setItem("them",them);
+        document.querySelector("html").className=them
     },[them])
     return (
         <Ctx.Provider value={themConfig}>

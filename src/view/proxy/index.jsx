@@ -86,8 +86,8 @@ const Proxy = ()=>{
            </div>
            {useMemo(()=>{
               return state.map((item,index)=>{
-                    return  <div  className="mt-10 whitespace-nowrap" key={item.key}>
-                    <label className="inline-block w-40 dark:text-white">{$lan("aliasMsg",sourceLan)}-{index+1}</label>
+                    return  <div  className="mt-10 whitespace-nowrap ml-40" key={item.key}>
+                    {/* <label className="inline-block w-40 dark:text-white">{$lan("aliasMsg",sourceLan)}-{index+1}</label> */}
                     <input readOnly type="text" className={" dark:bg-gray-800 dark:text-white h-10 rounded-md px-2 outline-none border border-blue-600 bg-gray-100 "+(item.disabled==true?"border-yellow-500 text-yellow-500":"")}  defaultValue={item.key} placeholder="key" />
                     <input readOnly type="text" className={" dark:bg-gray-800 dark:text-white h-10 rounded-md px-2 outline-none border border-blue-600 ml-6 bg-gray-100 "+(item.disabled==true?"border-yellow-500 text-yellow-500":"")} defaultValue={item.value} placeholder="value" />
                     {
