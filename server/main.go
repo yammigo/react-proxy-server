@@ -17,10 +17,11 @@ type User struct {
 }
 
 type ProxyData struct {
-	Host    string                   `json:"host"`
-	Dir     string                   `json:"dir"`
-	Headers string                   `json:"headers"`
-	Params  []map[string]interface{} `json:"params"`
+	Host     string                   `json:"host"`
+	Dir      string                   `json:"dir"`
+	Headers  string                   `json:"headers"`
+	Params   []map[string]interface{} `json:"params"`
+	HostList []map[string]interface{} `json:"hostList"`
 }
 
 func GetData(Struct interface{}, path string) {
@@ -47,16 +48,15 @@ func GetData(Struct interface{}, path string) {
 
 func WriteData(Struct interface{}, path string) {
 	/**写入数据到文件中**/
+
 }
 
 func resultData(w http.ResponseWriter, r *http.Request) {
-
 	w.Header().Set("Content-Type", "application/json")
 	proxyData := &ProxyData{}
 	GetData(proxyData, "./db/db.json")
 	fmt.Println(proxyData)
 	jsonData, _ := json.Marshal(proxyData)
-
 	io.WriteString(w, string(jsonData))
 }
 

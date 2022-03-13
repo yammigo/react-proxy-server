@@ -6,6 +6,7 @@ import { $lan } from "../../local/lang/index";
 import langCtx from "../../context/langCtx";
 import ThemCom from "../../components/themToogle"
 import Dialog from "../../components/dialog";
+import NavBar from "../../components/navBar";
 const Proxy = ()=>{
     const lanCtx = useContext(langCtx)
     const [state, setstate] = useState([]);
@@ -18,7 +19,7 @@ const Proxy = ()=>{
     useEffect(()=>{
         findRepition()?setErr(true):setErr(false)
     },[newPar]);
-
+    
     const toogleDisabled=(index)=>{
         if(typeof state[index].disabled == "undefined" || state[index].disabled==false){
                 state[index].disabled=true;
@@ -64,16 +65,14 @@ const Proxy = ()=>{
         }   
     }
 
+    console.log("渲染")
+
     return <>
        {/* <Dialog></Dialog> */}
-       <div className=" h-14 shadow-md flex justify-between items-center bg-blue-600 text-white p-2 w-full fixed top-0 z-10  overflow-hidden">
-           <span className=" test-sm font-bold">VG_PROXY</span>
-           <span>{$lan("tips")}</span>
-           <span className=" text-sm font-bold">
-                <ThemCom></ThemCom>
-                <Lang></Lang>
-          </span>
-       </div>
+       <NavBar>
+          <ThemCom></ThemCom>
+          <Lang></Lang>
+       </NavBar>
        <div className="p-4 min-w-0 block w-min-md whitespace-nowrap w-full overflow-auto min-h-screen pt-20">
            <Hostcom></Hostcom>
            <div className="mt-6 whitespace-nowrap relative">
@@ -85,6 +84,7 @@ const Proxy = ()=>{
                {errr?<div className=" absolute text-red-500 ml-40 mt-1 font-bold">{$lan("addErrormsg",sourceLan)}</div>:""}
            </div>
            {useMemo(()=>{
+               console.log("渲染列表")
               return state.map((item,index)=>{
                     return  <div  className="mt-10 whitespace-nowrap ml-40" key={item.key}>
                     {/* <label className="inline-block w-40 dark:text-white">{$lan("aliasMsg",sourceLan)}-{index+1}</label> */}
@@ -103,4 +103,4 @@ const Proxy = ()=>{
     </>
 }
 
-export default Proxy
+export default React.memo(Proxy)
