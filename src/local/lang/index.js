@@ -17,9 +17,6 @@ export function $lan(text, source) {
 
     /*兼容局部源利于语言扩展*/
     if (typeof source == "undefined") {
-        console.log(language)
-        console.log(currentLang)
-        console.log("执行内容", language[currentLang])
         return language[currentLang][text]
     } else {
         return source[currentLang][text]

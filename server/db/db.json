@@ -1,1 +1,18 @@
+<<<<<<< HEAD
 {"host":"http://baidu.cowqem23222","dir":"/node_module","headers":"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.36","params":[{"key":"par","value":"123455"}]}
+=======
+{
+    "userId": 1,
+    "host": "http://www.baidu.com",
+    "dir": "/dirtest",
+    "headers": "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.36",
+    "params": [{
+        "key": "par",
+        "value": "123455"
+    }],
+    "hostList": [{
+        "id": 1,
+        "host": "http://www.baidu.com"
+    }]
+}
+>>>>>>> f04ffa2ee332320063a639cadc41a7cc2a2ad774

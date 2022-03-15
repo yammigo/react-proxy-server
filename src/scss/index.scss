@@ -4,4 +4,9 @@ body {
     margin: 0px;
     background-size: cover;
     background-repeat: no-repeat;
+    height: 100%;
+}
+
+html {
+    min-height: 100%;
 }

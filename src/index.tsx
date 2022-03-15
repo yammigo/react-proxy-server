@@ -5,7 +5,6 @@ import ReactDOM from "react-dom"
 import {useLang} from "./local/lang/index"
 import Home from "./view/home"
 import { BrowserRouter,Route,Routes,Link,HashRouter} from "react-router-dom"
-import Tab2 from "./view/ta2"
 import Ctx from "./view/ctx"
 import LangCtx from "./context/langCtx"
 import Login from "./view/login/index"
@@ -27,7 +26,11 @@ const App=()=>{
     })
     useEffect(()=>{
         window.localStorage.setItem("them",them);
-        document.querySelector("html").className=them
+        document.querySelector("html").className=them;
+        setThemConfig({
+            them,
+            toggleThem
+        })
     },[them])
     return (
         <Ctx.Provider value={themConfig}>
@@ -42,7 +45,6 @@ const App=()=>{
                         <Route path="/" element={<Login/>} />
                         <Route path="/login" element={<Login/>} />
                         <Route path="/home" element={<Home/>} />
-                        <Route path="/tab2" element={<Tab2 />} />
                         <Route path="/proxy" element={<Proxy />} />
                     </Routes>
             </HashRouter>

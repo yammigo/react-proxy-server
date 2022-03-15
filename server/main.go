@@ -18,10 +18,11 @@ type User struct {
 }
 
 type ProxyData struct {
-	Host    string                   `json:"host"`
-	Dir     string                   `json:"dir"`
-	Headers string                   `json:"headers"`
-	Params  []map[string]interface{} `json:"params"`
+	Host     string                   `json:"host"`
+	Dir      string                   `json:"dir"`
+	Headers  string                   `json:"headers"`
+	Params   []map[string]interface{} `json:"params"`
+	HostList []map[string]interface{} `json:"hostList"`
 }
 
 type UserBody struct {
@@ -51,6 +52,7 @@ func GetData(Struct interface{}, path string) {
 }
 
 func WriteData(Struct interface{}, path string) {
+<<<<<<< HEAD
 	jsonData, _ := json.Marshal(Struct)
 	str := string(jsonData)
 	fmt.Println(str)
@@ -63,6 +65,10 @@ func WriteData(Struct interface{}, path string) {
 	w := bufio.NewWriter(file)
 	w.WriteString(strings.Replace(str, "\n", "", -1))
 	w.Flush()
+=======
+	/**写入数据到文件中**/
+
+>>>>>>> f04ffa2ee332320063a639cadc41a7cc2a2ad774
 }
 
 func resultData(w http.ResponseWriter, r *http.Request) {
