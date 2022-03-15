@@ -8,8 +8,11 @@ import request from "../../api/request"
 const Login = (props)=>{
      const navigator = useNavigate()
      const navTo = (e)=>{
-          // request.post("/login",{}).then(res=>{
-          //      console.log.log(res)
+          // request.get("https://weather-api.extfans.com/weather/forecast?lang=zh-CN&cid=CN101010100",{}).then(res=>{
+          //      console.log(res)
+          // })
+          // request.get("https://www.google.com/recaptcha/admin",()=>{
+          //      console.log(res);
           // })
           if(e.keyCode){
                if(e.keyCode==13){
@@ -24,7 +27,7 @@ const Login = (props)=>{
           <ThemCom></ThemCom>
           <Lang></Lang>
        </NavBar>
-       <div onKeyDown={navTo} className=" bg-white dark:bg-gray-700 text-gray-800 h-auto p-4 m-auto max-w-md rounded mt-56 shadow-md">
+       <div className=" bg-white dark:bg-gray-700 text-gray-800 h-auto p-4 m-auto max-w-md rounded mt-56 shadow-md">
             <div className=" font-bold text-blue-600 text-2xl text-center py-5">
                  VG_PROXY<em className="text-sm"></em>
             </div>
