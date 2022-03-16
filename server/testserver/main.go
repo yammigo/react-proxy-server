@@ -8,30 +8,28 @@ import (
 	"log"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
 )
 
-func GetFormData(r *http.Request) (string, interface{}) {
+func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 	contentType := r.Header["Content-Type"]
+	var bodyMap map[string]interface{}
 	if len(contentType) > 0 {
-		var bodyMap map[string]interface{}
 		if strings.Contains(contentType[0], "multipart/form-data") {
 			r.ParseMultipartForm(1024)
-			fmt.Println(r.Form)
-			return contentType[0], r.Form
+			return contentType[0], bodyMap, r.Form
 		} else {
 			if strings.Contains(contentType[0], "application/json") {
 				body, _ := ioutil.ReadAll(r.Body)
 				json.Unmarshal(body, &bodyMap)
-				return contentType[0], bodyMap
+				return contentType[0], bodyMap, r.Form
 			} else {
 				r.ParseForm()
-				return contentType[0], r.Form
+				return contentType[0], bodyMap, r.Form
 			}
 		}
 	} else {
-		return "", r.URL.Query()
+		return "", bodyMap, r.URL.Query()
 	}
 }
 
@@ -39,13 +37,16 @@ func main() {
 	mux := http.NewServeMux()
 	//实现请求转发
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		var v url.Values
+
 		str := "我是第3个服务"
-		contentType, values := GetFormData(r)
-		typ := reflect.TypeOf(values)
-		fmt.Println(typ == reflect.TypeOf(v))
+		contentType, jsonMap, values := GetFormData(r)
 		fmt.Println(contentType, "contentType")
-		fmt.Println(values, "values")
+
+		if jsonMap != nil {
+			fmt.Println(jsonMap, "asdasd")
+		} else {
+			fmt.Println(values, "values")
+		}
 		io.WriteString(w, str)
 	})
 	/**服务配置**/

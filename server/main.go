@@ -92,34 +92,27 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 //获取http requerst 参数
-func GetFormData(r *http.Request) (string, interface{}) {
+func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 	contentType := r.Header["Content-Type"]
 	var bodyMap map[string]interface{}
-	if strings.Contains(contentType[0], "multipart/form-data") {
-		r.ParseMultipartForm(1024)
-		fmt.Println(r.Form)
-		return contentType[0], r.Form
-	} else {
-		if strings.Contains(contentType[0], "application/json") {
-			body, _ := ioutil.ReadAll(r.Body)
-			json.Unmarshal(body, &bodyMap)
-			return contentType[0], bodyMap
+	if len(contentType) > 0 {
+		if strings.Contains(contentType[0], "multipart/form-data") {
+			r.ParseMultipartForm(1024)
+			return contentType[0], bodyMap, r.Form
 		} else {
-			r.ParseForm()
-			return contentType[0], r.Form
+			if strings.Contains(contentType[0], "application/json") {
+				body, _ := ioutil.ReadAll(r.Body)
+				json.Unmarshal(body, &bodyMap)
+				return contentType[0], bodyMap, r.Form
+			} else {
+				r.ParseForm()
+				return contentType[0], bodyMap, r.Form
+			}
 		}
+	} else {
+		return "", bodyMap, r.URL.Query()
 	}
 
-}
-
-func CreateProxy(targetHost string) *httputil.ReverseProxy {
-	url, err := url.Parse(targetHost)
-	if err != nil {
-		fmt.Println(err)
-	}
-	proxy := httputil.NewSingleHostReverseProxy(url)
-
-	return proxy
 }
 
 func singleJoiningSlash(a, b string) string {
@@ -153,10 +146,10 @@ func joinURLPath(a, b *url.URL) (path, rawpath string) {
 	return a.Path + b.Path, apath + bpath
 }
 
-func Proxy(w http.ResponseWriter, r *http.Request) {
-	proxy_addr, err := url.Parse("http://127.0.0.1:8082")
+func CreateProxy(target string) *httputil.ReverseProxy {
+	proxy_addr, err := url.Parse(target)
 	if err != nil {
-		return
+		fmt.Println(err)
 	}
 	proxy := httputil.NewSingleHostReverseProxy(proxy_addr)
 	proxy.Director = func(request *http.Request) {
@@ -173,18 +166,22 @@ func Proxy(w http.ResponseWriter, r *http.Request) {
 		if _, ok := request.Header["User-Agent"]; !ok {
 			request.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36")
 		}
-		log.Println("request.URL.Path：", request.URL.Path, "request.URL.RawQuery：", request.URL.RawQuery)
+		log.Print("request.URL.Path：", request.URL.Path, "\nrequest.URL.RawQuery：", request.URL.RawQuery, "\n\n")
 	}
-	proxy.ServeHTTP(w, r)
-	// io.WriteString(w, "asdasd")
+	return proxy
+}
 
+func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		proxy.ServeHTTP(w, r)
+	}
 }
 
 func main() {
-	proxy := CreateProxy("http://www.baidu.com:80")
+	proxy := CreateProxy("https://www.baidu.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
-	mux.HandleFunc("/data", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		r.ParseForm()
 		req, _ := ioutil.ReadAll(r.Body)
@@ -202,8 +199,7 @@ func main() {
 	mux.HandleFunc("/login", Login)
 	mux.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
 	//实现请求转发
-	mux.Handle("/proxy", proxy)
-	mux.HandleFunc("/", Proxy)
+	mux.HandleFunc("/", Proxy(proxy))
 	/**服务配置**/
 	server := &http.Server{
 		Addr:    ":8081",
