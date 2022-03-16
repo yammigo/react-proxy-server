@@ -12,7 +12,7 @@ module.exports = {
         rules: [
 
             {
-                test: /\.(png|jpg|gif|jpeg|svg)$/,
+                test: /\.(png|jpg|gif|jpeg)$/,
                 include: path.resolve(__dirname, "../src"),
                 use: [{
                     loader: "url-loader",

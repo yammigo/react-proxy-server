@@ -39,6 +39,9 @@ const Login = (props)=>{
             </div>
             <button className=" bg-blue-600 text-white w-full p-3 rounded-md block mx-auto mt-4 active:opacity-80 font-bold" onClick={navTo}>{$lan("login")}</button>
        </div>
+       <div className="text-gray-400 text-center pt-5">&copy; vg_proxy by fanjiantao 
+       <br></br>
+       <a href="https://github.com/yammigo/react-proxy-server" className="hover:text-white">GitHub</a></div>
      </>
 }
 
