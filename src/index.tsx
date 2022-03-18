@@ -9,6 +9,7 @@ import Ctx from "./view/ctx"
 import LangCtx from "./context/langCtx"
 import Login from "./view/login/index"
 import Proxy from "./view/proxy"
+import VgEdit from "./view/code_edit"
 const App=()=>{
     const currentThem =  window.localStorage.getItem("them")
     const currenLang = window.localStorage.getItem("lang")
@@ -46,6 +47,7 @@ const App=()=>{
                         <Route path="/login" element={<Login/>} />
                         <Route path="/home" element={<Home/>} />
                         <Route path="/proxy" element={<Proxy />} />
+                        <Route path="/codeEdit" element={<VgEdit />} />
                     </Routes>
             </HashRouter>
             </LangCtx.Provider>
