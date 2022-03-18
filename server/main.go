@@ -241,14 +241,14 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 
 func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// proxy.ModifyResponse(w, r, r)
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		proxy.ServeHTTP(w, r)
 
 	}
 }
 
 func main() {
-	proxy := CreateProxy("http://vbs.vgtech.com.cn")
+	proxy := CreateProxy("https://www.baidu.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
 	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {
