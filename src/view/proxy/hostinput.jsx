@@ -21,10 +21,6 @@ const Hostcom = ()=>{
     const changePath= (e)=>{
         setFolder(e.target.value.trim().replace(/\\/g,"/"))
     }
-
-
-
-   
         return   <div className="mt-6">
                     <label className=" inline-block w-40"></label>
                     <div className=" inline-block relative">
@@ -35,6 +31,7 @@ const Hostcom = ()=>{
                             {
                                 runStatus==true? <button className="ml-6 bg-red-600 text-white active:opacity-90 h-10 px-5 rounded-md">stop server</button>:<button className="ml-6 bg-blue-600 text-white active:opacity-90 h-10 px-5 rounded-md">{$lan("butrun",langsource)}</button>
                             }
+                            <button className="ml-6 bg-blue-600 text-white active:opacity-90 h-10 px-5 rounded-md">添加脚本</button>
                             {
                                 useMemo(()=>{
                                     <dl className={" bg-white dark:bg-gray-700 rounded-md absolute p-2 shadow-md "+(panel&&panelList.length>0?"":"hidden")}>

@@ -4,12 +4,7 @@ require(['vs/editor/editor.main'], function() {
     // 初始化变量
     var fileCounter = 0;
     var editorArray = [];
-    var defaultCode = [
-        `
-            /**
-     * javascript
-     */`
-    ].join('\n');
+    var defaultCode = [].join('');
 
     // 定义编辑器主题
     monaco.editor.defineTheme('myTheme', {
@@ -27,6 +22,9 @@ require(['vs/editor/editor.main'], function() {
             model: model,
         });
         editorArray.push(editor);
+        window.onresize = function() {
+            editor.layout();
+        };
         return editor;
     }
 
