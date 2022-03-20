@@ -1,3 +1,9 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-20 13:01:34
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-20 16:19:16
+ */
 import "./scss/index.scss"
 import "./scss/base.scss"
 import React,{useState,useEffect}from "react"
@@ -10,6 +16,7 @@ import LangCtx from "./context/langCtx"
 import Login from "./view/login/index"
 import Proxy from "./view/proxy"
 import VgEdit from "./view/code_edit"
+
 const App=()=>{
     const currentThem =  window.localStorage.getItem("them")
     const currenLang = window.localStorage.getItem("lang")

@@ -1,12 +1,19 @@
-import React from "react";
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-20 13:01:34
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-20 16:22:35
+ */
+import React ,{useEffect,useRef} from "react";
 const Edit = ()=>{
+    const iframe=useRef(null)
     return <>
-            <div style={{width:"calc(100% - 100px)",height:"calc(100vh - 120px)"}} className=" shadow-md bg-gray-200 h-screen m-auto rounded-md overflow-hidden">
+            <div style={{height:"calc(100vh - 120px)"}} className=" sm:w-full md:w-11/12 shadow-md bg-gray-200 h-screen m-auto rounded-md overflow-hidden">
                     <div style={{height:"40px"}} className="header shadow-md bg-white box-border px-3 dark:bg-gray-700 flex items-center justify-between">
                         <div className=" flex h-full items-center justify-between w-16">
-                             <div className=" w-4 h-4 rounded-full bg-orange-400"></div>
-                             <div className=" w-4 h-4 rounded-full bg-blue-600"></div>
-                             <div className=" w-4 h-4 rounded-full bg-red-600"></div>
+                             <div className=" w-4 h-4 rounded-full bg-red-500"></div>
+                             <div className=" w-4 h-4 rounded-full bg-orange-300"></div>
+                             <div className=" w-4 h-4 rounded-full bg-green-400"></div>
                         </div>
                         <div className="dark:text-white text-blue-600">
                               这里是状态显示
@@ -16,7 +23,7 @@ const Edit = ()=>{
                         </div>
                     </div>
                     <div className=" w-full  box-border" style={{height:"calc(100% - 40px)"}}>
-                           <iframe className=" border-0 w-full h-full" src="http://localhost:8081/public/edit/index.html"></iframe>
+                           <iframe  name="newdata" ref={iframe} className=" border-0 w-full h-full" src={"http://127.0.0.1:8081/public/edit/index.html#a"}></iframe>
                     </div>
             </div>
     </>
