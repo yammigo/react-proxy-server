@@ -1,3 +1,9 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-21 22:13:52
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-22 00:11:39
+ */
 /*!-----------------------------------------------------------
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Version: 0.18.1(d7a26172c5955d29d2a8cca4377b53b28925c766)
@@ -35,4 +41,6 @@ if("string"==typeof r)return this.synchronousRequire(r,t);this.defineModule(e.Ut
 ;for(var s=0,a=f.length;s<a;s++)this._loadPluginDependency(e.exports,f[s])}}},s}();e.ModuleManager=s}(AMDLoader||(AMDLoader={}));var define,AMDLoader;!function(e){function t(){if(void 0!==e.global.require||"undefined"!=typeof require){var t=e.global.require||require;if("function"==typeof t&&"function"==typeof t.resolve){var i=function(e){n.getRecorder().record(33,e);try{return t(e)}finally{n.getRecorder().record(34,e)}};e.global.nodeRequire=i,s.nodeRequire=i,s.__$__nodeRequire=i}}r.isNode&&!r.isElectronRenderer?(module.exports=s,require=s):(r.isElectronRenderer||(e.global.define=o),e.global.require=s)}var r=new e.Environment,n=null,o=function(e,t,r){"string"!=typeof e&&(r=t,t=e,e=null),"object"==typeof t&&Array.isArray(t)||(r=t,t=null),t||(t=["require","exports","module"]),e?n.defineModule(e,t,r,null,null):n.enqueueDefineAnonymousModule(t,r)};o.amd={jQuery:!0};var i=function(e,t){void 0===t&&(t=!1),n.configure(e,t)},s=function(){if(1===arguments.length){
 if(arguments[0]instanceof Object&&!Array.isArray(arguments[0]))return void i(arguments[0]);if("string"==typeof arguments[0])return n.synchronousRequire(arguments[0])}if(2!==arguments.length&&3!==arguments.length||!Array.isArray(arguments[0]))throw new Error("Unrecognized require call");n.defineModule(e.Utilities.generateAnonymousModule(),arguments[0],arguments[1],arguments[2],null)};s.config=i,s.getConfig=function(){return n.getConfig().getOptionsLiteral()},s.reset=function(){n=n.reset()},s.getBuildInfo=function(){return n.getBuildInfo()},s.getStats=function(){return n.getLoaderEvents()},s.define=function(){return o.apply(null,arguments)},e.init=t,"function"==typeof e.global.define&&e.global.define.amd||(n=new e.ModuleManager(r,e.createScriptLoader(r),o,s,e.Utilities.getHighPerformanceTimestamp()),void 0!==e.global.require&&"function"!=typeof e.global.require&&s.config(e.global.require),(define=function(){return o.apply(null,arguments)}).amd=o.amd,"undefined"==typeof doNotInitLoader&&t())
 }(AMDLoader||(AMDLoader={}));
+
+
 //# sourceMappingURL=../../min-maps/vs/loader.js.map

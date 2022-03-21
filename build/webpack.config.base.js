@@ -1,3 +1,9 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-21 22:13:52
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-22 00:51:36
+ */
 const path = require("path")
 const webpack = require("webpack")
 const CopyPlugin = require("copy-webpack-plugin");
@@ -62,8 +68,7 @@ module.exports = {
     },
     plugins: [
         // new webpack.ProvidePlugin({
-        //     getFanjiantao: path.resolve(__dirname, "../public/lib/index.js"),
-        //     // ...
+           
         // }),
         new CopyPlugin({
             patterns: [{
@@ -77,11 +82,19 @@ module.exports = {
         //     features: ["coreCommands", "find"]
         // })
     ],
+   
     externalsType: 'script',
     externals: {
+
         codeEdit: [
-            './dist/public/edit/app.js',
+            './public/lib/edit/app.js',
         ],
+        
+        editLoad:[
+            "./public/lib/modules/monaco-editor/min/vs/loader.js",
+            "nameOfGlobal"   
+        ],
+        
 
     }
 }

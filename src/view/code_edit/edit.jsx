@@ -2,15 +2,40 @@
  * @Author: fanjiantao
  * @Date: 2022-03-20 13:01:34
  * @LastEditors: OBKoro1
- * @LastEditTime: 2022-03-20 16:22:35
+ * @LastEditTime: 2022-03-22 00:44:17
  */
 
 // import  (/* webpackChunkName: "my-chunk-name" */ "admcc")
-import  (/* webpackChunkName: "my-chunk-name" */ "../../../public/index")
+
 // console.log(head([1, 2, 3])); // logs 1 here
+
+
+
 import React ,{useEffect,useRef} from "react";
+function getModule(){
+    import  (/* webpackChunkName: "my-chunk-name" */ "../../../public/index")
+    // require("editLoad")
+    // import(/* webpackChunkName: "my-chunk-name"*/"editLoad").then((res)=>{
+    //     console.log('加载完成',res)
+    // }).catch((err)=>{
+    //     console.log('加载失败',err)
+    // })
+}
 const Edit = ()=>{
-    console.log(window.getFanjiantao)
+    useEffect(() => {
+
+            getModule()
+      
+       
+       
+        // import(/* webpackChunkName: "my-chunk-name"*/"editLoad").then(()=>{
+        //     console.log('加载完成')
+        //     // import ("codeEdit").then(()=>{
+        //     //     console.log("加载模块")
+        //     // })
+        // })
+       
+    }, []);
     const iframe=useRef(null)
     return <>
             <div style={{height:"calc(100vh - 120px)"}} className=" sm:w-full md:w-11/12 shadow-md bg-gray-200 h-screen m-auto rounded-md overflow-hidden">
