@@ -1,5 +1,7 @@
 const path = require("path")
-    // const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const webpack = require("webpack")
+const CopyPlugin = require("copy-webpack-plugin");
+// const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -23,6 +25,7 @@ module.exports = {
                     }
                 }],
             },
+
             {
                 test: /\.(eot|ttf|woff|woff2)(\?.*)?$/,
                 include: path.resolve(__dirname, "../src"),
@@ -52,16 +55,33 @@ module.exports = {
                     loader: "ts-loader"
                 }]
             }
-
         ]
     },
     resolve: {
         extensions: ['.js', '.jsx', '.tsx'],
     },
     plugins: [
+        // new webpack.ProvidePlugin({
+        //     getFanjiantao: path.resolve(__dirname, "../public/lib/index.js"),
+        //     // ...
+        // }),
+        new CopyPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, '../public/lib'),
+                to: path.resolve(__dirname, "../dist/public/lib"),
+            }, ],
+
+        }),
         // new MonacoWebpackPlugin({
         //     languages: ["javascript", "css", "html", "json"],
         //     features: ["coreCommands", "find"]
         // })
-    ]
+    ],
+    externalsType: 'script',
+    externals: {
+        codeEdit: [
+            './dist/public/edit/app.js',
+        ],
+
+    }
 }

@@ -4,8 +4,13 @@
  * @LastEditors: OBKoro1
  * @LastEditTime: 2022-03-20 16:22:35
  */
+
+// import  (/* webpackChunkName: "my-chunk-name" */ "admcc")
+import  (/* webpackChunkName: "my-chunk-name" */ "../../../public/index")
+// console.log(head([1, 2, 3])); // logs 1 here
 import React ,{useEffect,useRef} from "react";
 const Edit = ()=>{
+    console.log(window.getFanjiantao)
     const iframe=useRef(null)
     return <>
             <div style={{height:"calc(100vh - 120px)"}} className=" sm:w-full md:w-11/12 shadow-md bg-gray-200 h-screen m-auto rounded-md overflow-hidden">
