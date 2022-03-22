@@ -68,7 +68,7 @@ module.exports = {
     },
     plugins: [
         // new webpack.ProvidePlugin({
-           
+        //     editLoad: path.resolve(__dirname, "../public/index.js")
         // }),
         new CopyPlugin({
             patterns: [{
@@ -82,19 +82,19 @@ module.exports = {
         //     features: ["coreCommands", "find"]
         // })
     ],
-   
+
     externalsType: 'script',
     externals: {
 
         codeEdit: [
             './public/lib/edit/app.js',
+            "monaco",
         ],
-        
-        editLoad:[
+        editLoad: [
             "./public/lib/modules/monaco-editor/min/vs/loader.js",
-            "nameOfGlobal"   
+            "_amdLoaderGlobal"
         ],
-        
+
 
     }
 }

@@ -4,5 +4,3 @@
  * @LastEditors: OBKoro1
  * @LastEditTime: 2022-03-22 00:28:11
  */
-import ("editLoad")
-export default "adad"

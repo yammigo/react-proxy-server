@@ -4,21 +4,22 @@
  * @LastEditors: OBKoro1
  * @LastEditTime: 2022-03-20 16:20:31
  */
-
-require.config({ paths: { 'vs': '../modules/monaco-editor/min/vs' } });
+var monaco = null
+require.config({ paths: { 'vs': './public/lib/modules/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function() {
-
-    // 初始化变量
+    var reize = window.onresize
+        // 初始化变量
     var fileCounter = 0;
     var editorArray = [];
     var defaultCode = [].join('');
+    monaco = monaco
 
-    // 定义编辑器主题
     monaco.editor.defineTheme('myTheme', {
         base: 'vs',
         inherit: true,
         rules: [{ background: 'EDF9FA' }],
-        // colors: { 'editor.lineHighlightBackground': '#0000FF20' }
+        colors: { 'editor.lineHighlightBackground': '#0000FF20' }
+
     });
     monaco.editor.setTheme('myTheme');
 
@@ -28,29 +29,21 @@ require(['vs/editor/editor.main'], function() {
         var editor = monaco.editor.create(document.getElementById(container_id), {
             model: model,
         });
-        editorArray.push(editor);
         window.onresize = function() {
+            reize && reize();
             editor.layout();
         };
+        editorArray.push(editor);
         return editor;
     }
-
     // 新建一个 div
     function addNewEditor(code, language) {
         var new_container = document.createElement("DIV");
         new_container.id = "container-" + fileCounter.toString(10);
-        new_container.className = "container";
-
-        document.getElementById("root").appendChild(new_container);
+        new_container.style.cssText = "position:absolute;top:0;left:0;right:0;bottom:0;"
+        document.getElementById("monacoEdit").appendChild(new_container);
         newEditor(new_container.id, code, language);
         fileCounter += 1;
     }
     addNewEditor(defaultCode, 'javascript');
-
-    window.Editor = {
-        addNewEditor: addNewEditor
-    }
-
-
-
 });
