@@ -2,9 +2,10 @@
  * @Author: fanjiantao
  * @Date: 2022-03-20 13:01:33
  * @LastEditors: OBKoro1
- * @LastEditTime: 2022-03-20 16:20:31
+ * @LastEditTime: 2022-03-23 00:07:01
  */
-var monaco = null
+var monaco = function(){}
+window.MONACO = function(){}
 require.config({ paths: { 'vs': './public/lib/modules/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function() {
     var reize = window.onresize
@@ -12,7 +13,6 @@ require(['vs/editor/editor.main'], function() {
     var fileCounter = 0;
     var editorArray = [];
     var defaultCode = [].join('');
-    monaco = monaco
 
     monaco.editor.defineTheme('myTheme', {
         base: 'vs',
@@ -40,10 +40,13 @@ require(['vs/editor/editor.main'], function() {
     function addNewEditor(code, language) {
         var new_container = document.createElement("DIV");
         new_container.id = "container-" + fileCounter.toString(10);
-        new_container.style.cssText = "position:absolute;top:0;left:0;right:0;bottom:0;"
+        new_container.style.cssText = "position:absolute;top:1px;left:0;right:0;bottom:0;"
         document.getElementById("monacoEdit").appendChild(new_container);
-        newEditor(new_container.id, code, language);
+        
+        MONACO(newEditor(new_container.id, code, language))
         fileCounter += 1;
     }
+    
     addNewEditor(defaultCode, 'javascript');
+    
 });
