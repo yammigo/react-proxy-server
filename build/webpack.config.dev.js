@@ -38,7 +38,7 @@ module.exports = merge(baseconfig, {
             inject: "body",
         }),
 
-        new webpack.HotModuleReplacementPlugin(),
+        // new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
         open: true,

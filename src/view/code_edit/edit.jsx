@@ -19,28 +19,13 @@ function initEdit(monaco){
 }
 
 async function getModule(){
-  
-    // import  (/* webpackChunkName: "my-chunk-name" */ "../../../public/index")
-    // require("editLoad")
     await import("editLoad")
     await import("codeEdit")
-    
     MONACO=initEdit
 }
 const Edit = ()=>{
     useEffect(() => {
-
             getModule()
-      
-       
-       
-        // import(/* webpackChunkName: "my-chunk-name"*/"editLoad").then(()=>{
-        //     console.log('加载完成')
-        //     // import ("codeEdit").then(()=>{
-        //     //     console.log("加载模块")
-        //     // })
-        // })
-       
     }, []);
 
     function getCode(){
@@ -50,7 +35,7 @@ const Edit = ()=>{
             winname.document.writeln(`<body><script>${codeEdit.getValue()}</script></body>`);
             winname=null;
     }
-    const iframe=useRef(null)
+   
     return <>
             <div style={{height:"calc(100vh - 120px)"}} className=" sm:w-full md:w-11/12 shadow-md bg-gray-200 h-screen m-auto rounded-md">
                     <div style={{height:"40px"}} className="header shadow-md bg-white box-border px-3 dark:bg-gray-700 flex items-center justify-between overflow-hidden">
