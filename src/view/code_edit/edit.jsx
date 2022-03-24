@@ -7,15 +7,25 @@
 
 // import  (/* webpackChunkName: "my-chunk-name" */ "admcc")
 
-import React ,{useEffect,useRef} from "react";
+import React ,{useEffect} from "react";
 
 let codeEdit=null;
 
-function initEdit(monaco){
-    // console.log(monaco);
+function initEdit(editor,monaco){
+    codeEdit=editor;
+    monaco.editor.defineTheme('myTheme', {
+        base: 'vs',
+        inherit: true,
+        rules: [{ background: 'EDF9FA' }],
+        colors: { 'editor.lineHighlightBackground': '#0000FF20' }
 
-    codeEdit=monaco;
-   
+    });
+    // monaco.editor.setTheme('myTheme');
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
+        console.log('SAVE pressed!')
+        editor.getAction('editor.action.formatDocument').run();
+    })
+  
 }
 
 async function getModule(){
