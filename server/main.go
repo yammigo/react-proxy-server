@@ -240,6 +240,7 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 }
 
 func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
+	fmt.Println("执行代理函数")
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		proxy.ServeHTTP(w, r)
@@ -299,9 +300,23 @@ func main() {
 		w.Header().Set("Content-Type", res.Header.Get("Content-Type"))
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Encoding", "gzip")
+		//设置浏览器缓存时间
+		w.Header().Set("Cache-Control", "max-age=31536000")
 		bytes.NewBuffer(body).WriteTo(w)
 
 	})
+	mux.HandleFunc("/createHttp", func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			if p := recover(); p != nil {
+				bytes.NewBufferString("{msg:程序出现错误}").WriteTo(w)
+			}
+		}()
+		mux.HandleFunc("/newHttp", func(w http.ResponseWriter, r *http.Request) {
+			bytes.NewBufferString("{msg:我是新接口}").WriteTo(w)
+		})
+		bytes.NewBufferString("{msg:创建成功}").WriteTo(w)
+	})
+
 	//实现请求转发
 	mux.HandleFunc("/", Proxy(proxy))
 	/**服务配置**/

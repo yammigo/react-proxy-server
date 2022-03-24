@@ -12,7 +12,7 @@ const Lang= ()=>{
              lang:e.target.value,
              toggleLang:ctx.toggleLang
          });
-     }} className=" h-7 test-sm cursor-pointer text-blue-600 w-28 rounded-sm px-2 shadow-md">
+     }} className=" outline-none h-7 test-sm cursor-pointer text-blue-600 w-28 rounded-sm px-2 shadow-md">
         <option value="zh_cn">简体中文</option>
         <option value="en">English</option>
     </select>
