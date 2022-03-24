@@ -1,3 +1,10 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-20 13:01:33
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-20 16:20:31
+ */
+
 require.config({ paths: { 'vs': '../modules/monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function() {
 
@@ -39,5 +46,11 @@ require(['vs/editor/editor.main'], function() {
         fileCounter += 1;
     }
     addNewEditor(defaultCode, 'javascript');
+    
+    window.onhashchange=function(){
+        console.log(editorArray)
+    }
+    
+    
 
 });

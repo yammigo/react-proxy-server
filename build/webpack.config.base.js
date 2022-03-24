@@ -1,5 +1,13 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-21 22:13:52
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-03-22 00:51:36
+ */
 const path = require("path")
-    // const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const webpack = require("webpack")
+const CopyPlugin = require("copy-webpack-plugin");
+// const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -23,6 +31,7 @@ module.exports = {
                     }
                 }],
             },
+
             {
                 test: /\.(eot|ttf|woff|woff2)(\?.*)?$/,
                 include: path.resolve(__dirname, "../src"),
@@ -52,16 +61,40 @@ module.exports = {
                     loader: "ts-loader"
                 }]
             }
-
         ]
     },
     resolve: {
         extensions: ['.js', '.jsx', '.tsx'],
     },
     plugins: [
+        // new webpack.ProvidePlugin({
+        //     editLoad: path.resolve(__dirname, "../public/index.js")
+        // }),
+        new CopyPlugin({
+            patterns: [{
+                from: path.resolve(__dirname, '../public/lib'),
+                to: path.resolve(__dirname, "../dist/public/lib"),
+            }, ],
+
+        }),
         // new MonacoWebpackPlugin({
         //     languages: ["javascript", "css", "html", "json"],
         //     features: ["coreCommands", "find"]
         // })
-    ]
+    ],
+
+    externalsType: 'script',
+    externals: {
+
+        codeEdit: [
+            './public/lib/edit/app.js',
+            "monaco",
+        ],
+        editLoad: [
+            "./public/lib/modules/monaco-editor/min/vs/loader.js",
+            "_amdLoaderGlobal"
+        ],
+
+
+    }
 }

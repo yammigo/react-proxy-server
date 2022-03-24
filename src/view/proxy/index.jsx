@@ -84,7 +84,7 @@ const Proxy = ()=>{
                {errr?<div className=" absolute text-red-500 ml-40 mt-1 font-bold">{$lan("addErrormsg",sourceLan)}</div>:""}
            </div>
            {useMemo(()=>{
-               console.log("渲染列表")
+               
               return state.map((item,index)=>{
                     return  <div  className="mt-10 whitespace-nowrap ml-40" key={item.key}>
                     {/* <label className="inline-block w-40 dark:text-white">{$lan("aliasMsg",sourceLan)}-{index+1}</label> */}

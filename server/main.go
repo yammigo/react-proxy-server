@@ -119,6 +119,32 @@ func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 
 }
 
+func SetFormParams(r *http.Request) {
+
+	// contentType := r.Header["Content-Type"]
+	var bodyMap []map[string]interface{}
+
+	fmt.Println(bodyMap)
+	// fmt.Println(bodyMap)
+	// if len(contentType) > 0 {
+	// 	if strings.Contains(contentType[0], "multipart/form-data") {
+	// 		r.ParseMultipartForm(1024)
+	// 		// return contentType[0], bodyMap, r.Form
+	// 	} else {
+	// 		if strings.Contains(contentType[0], "application/json") {
+	// 			body, _ := ioutil.ReadAll(r.Body)
+	// 			json.Unmarshal(body, &bodyMap)
+	// 			// return contentType[0], bodyMap, r.Form
+	// 		} else {
+	// 			r.ParseForm()
+	// 			// return contentType[0], bodyMap, r.Form
+	// 		}
+	// 	}
+	// } else {
+	// 	// return "", bodyMap, r.URL.Query()
+	// }
+}
+
 func singleJoiningSlash(a, b string) string {
 	aslash := strings.HasSuffix(a, "/")
 	bslash := strings.HasPrefix(b, "/")
