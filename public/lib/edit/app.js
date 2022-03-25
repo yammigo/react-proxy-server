@@ -31,8 +31,6 @@ require(['vs/editor/editor.main'], function() {
             // theme: "vs-dark"
 
         });
-
-
         window.onresize = function() {
             reize && reize();
             editor.layout();

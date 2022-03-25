@@ -31,9 +31,15 @@ type ProxyData struct {
 	HostList []map[string]interface{} `json:"hostList"`
 }
 
+type BeforeParams struct {
+	Params []map[string]interface{} `json:"params"`
+}
+
 type UserBody struct {
 	Usera string `params:"usera"`
 }
+
+var Before_params BeforeParams
 
 func GetData(Struct interface{}, path string) {
 	/**读取数据方法**/
@@ -119,12 +125,12 @@ func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 
 }
 
-func SetFormParams(r *http.Request) {
+func SetFormParams() {
+	beforPar := BeforeParams{}
+	GetData(&beforPar, "./db/db.json")
+	Before_params = beforPar
 
 	// contentType := r.Header["Content-Type"]
-	var bodyMap []map[string]interface{}
-
-	fmt.Println(bodyMap)
 	// fmt.Println(bodyMap)
 	// if len(contentType) > 0 {
 	// 	if strings.Contains(contentType[0], "multipart/form-data") {
@@ -208,10 +214,8 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 	proxy := httputil.NewSingleHostReverseProxy(proxy_addr)
 	proxy.Director = func(request *http.Request) {
 		targetQuery := proxy_addr.RawQuery
-
 		//这里只选择两种压缩方式 方便兼容
 		request.Header.Set("Accept-Encoding", "gzip, deflate")
-
 		request.URL.Scheme = proxy_addr.Scheme
 		request.URL.Host = proxy_addr.Host
 		request.Host = proxy_addr.Host // todo 这个是关键
@@ -224,8 +228,13 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		if _, ok := request.Header["User-Agent"]; !ok {
 			request.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36")
 		}
-		fmt.Println(request.Header)
-		log.Print("request.URL.Path：", request.URL.Path, "\nrequest.URL.RawQuery：", request.URL.RawQuery, "\n\n")
+		path, _ := url.PathUnescape(request.URL.RequestURI())
+		fmt.Printf(`{Scheme:%s,Host:%s,Method:%s}%s`, request.URL.Scheme, request.URL.Host, request.Method, "\n")
+		if request.Method == "POST" {
+			fmt.Println(GetFormData(request))
+		}
+		fmt.Println(request.RemoteAddr)
+		fmt.Println(path + "\n\n")
 
 	}
 
@@ -264,13 +273,14 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 	}
 	return proxy
 }
-
 func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
 	fmt.Println("执行代理函数")
+	fmt.Println(Before_params)
 	return func(w http.ResponseWriter, r *http.Request) {
+		// fmt.Println(BeforeParams.Params)
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		proxy.ServeHTTP(w, r)
-
+		// bytes.NewBufferString("test").WriteTo(w)
 	}
 }
 
@@ -290,7 +300,7 @@ func FileNewServer(dir http.Dir) *http.Client {
 }
 
 func main() {
-
+	SetFormParams()
 	proxy := CreateProxy("https://www.baidu.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
