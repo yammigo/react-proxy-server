@@ -205,7 +205,6 @@ func GzipFast(a *[]byte) []byte {
 	gz.Flush()
 	return b.Bytes()
 }
-
 func CreateProxy(target string) *httputil.ReverseProxy {
 	proxy_addr, err := url.Parse(target)
 	if err != nil {
@@ -257,10 +256,29 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		if err != nil {
 			return err
 		}
-
 		if strings.Contains(response.Header.Get("Content-Type"), "text/html") {
 			b := []byte(string(`<script>console.log("注入脚本")</script>`))
-			body = bytes.Join([][]byte{body, b}, []byte(""))
+			before := []byte(string(`<script>
+			function checkA(e) {
+				var parent = e.target;
+	
+				while (parent.tagName != "A" && parent != document.body) {
+	
+					parent = parent.parentNode
+					console.log("查找", parent)
+				}
+				parent.href = "#"
+	      
+				return parent
+	
+			}
+			window.onload = function() {
+				document.body.addEventListener("click", checkA)
+	
+			}
+		</script>`))
+			body = bytes.Join([][]byte{before, body, b}, []byte(""))
+
 		}
 		// fmt.Println(*(*string)(unsafe.Pointer(&body)), "解析数据")
 		body = GzipFast(&body)
@@ -268,7 +286,6 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		response.Body = ioutil.NopCloser(bytes.NewReader(body))
 		response.ContentLength = int64(len(body))
 		response.Header.Set("Content-Length", strconv.Itoa(len(body)))
-
 		return nil
 	}
 	return proxy
@@ -301,7 +318,7 @@ func FileNewServer(dir http.Dir) *http.Client {
 
 func main() {
 	SetFormParams()
-	proxy := CreateProxy("https://www.baidu.com")
+	proxy := CreateProxy("https://v.qq.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
 	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {
@@ -352,7 +369,6 @@ func main() {
 		})
 		bytes.NewBufferString("{msg:创建成功}").WriteTo(w)
 	})
-
 	//实现请求转发
 	mux.HandleFunc("/", Proxy(proxy))
 	/**服务配置**/
