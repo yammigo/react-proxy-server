@@ -240,7 +240,6 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 	// http.Get(url string)
 
 	proxy.ModifyResponse = func(response *http.Response) error {
-
 		// fmt.Println(path.Ext(response.Request.RequestURI), "后缀")
 		ioReader, err := switchContentEncoding(response)
 		if err != nil {
@@ -250,9 +249,7 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		if err != nil {
 			return err
 		}
-
 		err = response.Body.Close()
-
 		if err != nil {
 			return err
 		}
@@ -261,24 +258,19 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 			before := []byte(string(`<script>
 			function checkA(e) {
 				var parent = e.target;
-	
 				while (parent.tagName != "A" && parent != document.body) {
-	
 					parent = parent.parentNode
-					console.log("查找", parent)
 				}
-				parent.href = "#"
-	      
+				parent.href = "javascript:void();";
+				parent.target="";
+				parent.scene= "";
+				parent.setAttribute("target","");
+				parent.setAttribute("scene","");
 				return parent
-	
 			}
-			window.onload = function() {
-				document.body.addEventListener("click", checkA)
-	
-			}
+			setTimeout(()=>{document.body.addEventListener("mousedown", checkA)},500)
 		</script>`))
 			body = bytes.Join([][]byte{before, body, b}, []byte(""))
-
 		}
 		// fmt.Println(*(*string)(unsafe.Pointer(&body)), "解析数据")
 		body = GzipFast(&body)
@@ -294,7 +286,7 @@ func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
 	fmt.Println("执行代理函数")
 	fmt.Println(Before_params)
 	return func(w http.ResponseWriter, r *http.Request) {
-		// fmt.Println(BeforeParams.Params)
+		fmt.Println(r.RemoteAddr)
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		proxy.ServeHTTP(w, r)
 		// bytes.NewBufferString("test").WriteTo(w)
@@ -318,7 +310,7 @@ func FileNewServer(dir http.Dir) *http.Client {
 
 func main() {
 	SetFormParams()
-	proxy := CreateProxy("https://v.qq.com")
+	proxy := CreateProxy("https://www.baidu.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
 	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {
