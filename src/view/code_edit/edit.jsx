@@ -2,7 +2,7 @@
  * @Author: fanjiantao
  * @Date: 2022-03-20 13:01:34
  * @LastEditors: OBKoro1
- * @LastEditTime: 2022-03-23 00:56:34
+ * @LastEditTime: 2022-04-04 22:57:40
  */
 
 // import  (/* webpackChunkName: "my-chunk-name" */ "admcc")
@@ -35,7 +35,10 @@ async function getModule(){
 }
 const Edit = ()=>{
     useEffect(() => {
-            getModule()
+                
+                getModule()
+                
+                console.log("执行")
     }, []);
 
     function getCode(){
@@ -45,7 +48,6 @@ const Edit = ()=>{
             winname.document.writeln(`<body><script>${codeEdit.getValue()}</script></body>`);
             winname=null;
     }
-   
     return <>
             <div style={{height:"calc(100vh - 120px)"}} className=" sm:w-full md:w-11/12 shadow-md bg-gray-200 h-screen m-auto rounded-md">
                     <div style={{height:"40px"}} className="header shadow-md bg-white box-border px-3 dark:bg-gray-700 flex items-center justify-between overflow-hidden">

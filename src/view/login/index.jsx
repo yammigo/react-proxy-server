@@ -1,3 +1,9 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-22 23:29:34
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-04-04 22:32:01
+ */
 import { $lan } from "../../local/lang";
 import React,{useState}from "react";
 import {useNavigate} from "react-router-dom";
@@ -24,8 +30,7 @@ const Login = (props)=>{
      }
      return <>
        <NavBar>
-          <ThemCom></ThemCom>
-          <Lang></Lang>
+            <div className=" flex items-center absolute right-2"><ThemCom></ThemCom> <Lang></Lang></div>
        </NavBar>
        <div className=" bg-white dark:bg-gray-700 text-gray-800 h-auto p-4 m-auto max-w-md rounded mt-56 shadow-md">
             <div className=" font-bold text-blue-600 text-2xl text-center py-5">

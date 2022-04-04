@@ -1,3 +1,9 @@
+/*
+ * @Author: fanjiantao
+ * @Date: 2022-03-20 13:01:33
+ * @LastEditors: OBKoro1
+ * @LastEditTime: 2022-04-04 22:14:53
+ */
 const envpresets = () => {
     if (process.env.NODE_ENV == "production") {
         return [
@@ -44,6 +50,14 @@ const babelConfig = {
         "@babel/preset-react"
     ],
     "plugins": [
+        [
+            "import",
+            {
+                "libraryName": "@icon-park/react",
+                "libraryDirectory": "es/icons",
+                "camel2DashComponentName": false 
+            }
+        ],
         ...envplugins()
     ]
 }

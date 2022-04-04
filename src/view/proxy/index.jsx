@@ -70,8 +70,7 @@ const Proxy = ()=>{
     return <>
        {/* <Dialog></Dialog> */}
        <NavBar>
-          <ThemCom></ThemCom>
-          <Lang></Lang>
+         <div className=" flex items-center absolute right-2"><ThemCom></ThemCom> <Lang></Lang></div>
        </NavBar>
        <div className="p-4 min-w-0 block w-min-md whitespace-nowrap w-full overflow-auto min-h-screen pt-20">
            <Hostcom></Hostcom>

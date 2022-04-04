@@ -1,5 +1,6 @@
 
 import React,{useEffect,useState, useContext}from "react"
+import {Sun,Moon} from "@icon-park/react"
 import Ctx from "../view/ctx"
 import light from "../static/icons/sun-fill.png"
 const ThemCom = ()=>{
@@ -10,14 +11,9 @@ const ThemCom = ()=>{
        setDrak(!drak)
        ctx.toggleThem(drak?"light":"dark");
     }
-    return  <div onClick={switchToggle} className=" overflow-hidden cursor-pointer w-8 bg-white h-8 box-border inline-table align-middle mr-4 rounded-full">
-    <div  style={{
-    backgroundImage:drak?'none':`url(${light}`,
-    backgroundRepeat:"no-repeat",
-   "transform":`translateX(${drak?'-10':'0'}px) translateY(${drak?'-3':'0'}px)`
-   }}  className={"bg-cover-0.5 bg-center shadow transition-all h-9 w-9 border  rounded-full inline-block align-middle "+(drak?"bg-blue-600":" bg-blue-600")}></div>
-
-</div>
+    return  <div onClick={switchToggle} className=" overflow-hidden cursor-pointer w-8  h-8 box-border  rounded-full inline-block mx-2">
+        {drak?<Sun theme="outline" size="24" fill="#fff"/>:<Moon theme="outline" size="24" fill="#fff"/>}
+       </div>
 }
 
 export default React.memo(ThemCom)
