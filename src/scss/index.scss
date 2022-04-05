@@ -12,5 +12,12 @@ html {
 }
 
 .minimap {
-    box-shadow: -3px 1px 4px 0px #000;
+    border-left:1px solid black;
+}
+.monaco-editor .view-line{
+  font-weight:bold;
+  .mtk1{
+      color: orange;
+  }
+ 
 }
