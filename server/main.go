@@ -309,8 +309,13 @@ func FileNewServer(dir http.Dir) *http.Client {
 }
 
 func main() {
-	SetFormParams()
-	proxy := CreateProxy("https://www.baidu.com")
+	// SetFormParams()
+	//1.获取需要运行的代理url
+	//2.运行代理
+	//3.插入脚本
+	//4.执行脚本
+
+	proxy := CreateProxy("https://v.qq.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
 	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {

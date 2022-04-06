@@ -13,7 +13,8 @@
         "disabled": "disabled",
         "remove": "remove",
         "enabled": "enabled",
-        "selectFolder": "select root file"
+        "selectFolder": "select root file",
+        "addScript": "add script"
     },
     "zh_cn": {
         "butrun": "运行服务",
@@ -29,6 +30,6 @@
         "disabled": "禁用",
         "remove": "删除",
         "enabled": "启用",
-        "selectFolder": "选择入口文件"
+        "addScript": "添加脚本"
     }
 }

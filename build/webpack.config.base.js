@@ -54,13 +54,13 @@ module.exports = {
                     }
                 }],
             },
-            {
-                test: /.(ts)$/,
-                include: path.resolve(__dirname, "../src"),
-                use: [{
-                    loader: "ts-loader"
-                }]
-            }
+            // {
+            //     test: /.(ts|js|tsx|jsx)$/,
+            //     include: path.resolve(__dirname, "../src"),
+            //     use: [{
+            //         loader: "ts-loader"
+            //     }]
+            // }
         ]
     },
     resolve: {
