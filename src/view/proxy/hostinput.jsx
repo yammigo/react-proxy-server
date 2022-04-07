@@ -35,7 +35,7 @@ const Hostcom = ()=>{
                             {
                                 runStatus==true? <button className="ml-6 bg-red-600 text-white active:opacity-90 h-10 px-5 ">stop server</button>:<button className="ml-6 bg-blue-600 text-white active:opacity-90 h-10 px-5 ">{$lan("butrun",langsource)}</button>
                             }
-                            <button onClick={()=>nav("/codeEdit")} className="ml-6 bg-blue-600 text-white active:opacity-90 h-10 px-5  items-center"><Code theme="outline" className=" inline-block align-middle mr-1" size="18" fill="#fff" strokeWidth={4}/>{$lan("addScript",langsource)}</button>
+                            <button onClick={()=>nav("/codeEdit")} className="ml-6 bg-blue-600 text-white active:opacity-90 h-10 px-5  items-center"><Code theme="outline" className=" inline-block align-middle mr-1" size="14" fill="#fff" strokeWidth={4}/>{$lan("addScript",langsource)}</button>
                            
                             {
                                 useMemo(()=>{
