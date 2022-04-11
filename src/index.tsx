@@ -37,6 +37,7 @@ const App=()=>{
     useEffect(()=>{
         window.localStorage.setItem("them",them);
         document.querySelector("html").className=them;
+        document.body.setAttribute('arco-theme', them);
         setThemConfig({
             them,
             toggleThem

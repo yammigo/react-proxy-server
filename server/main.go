@@ -82,7 +82,7 @@ func ResultData(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	proxyData := &ProxyData{}
 	GetData(proxyData, "./db/db.json")
-	fmt.Println(proxyData, "执行")
+	// fmt.Println(proxyData, "执行")
 	jsonData, _ := json.Marshal(proxyData)
 	io.WriteString(w, string(jsonData))
 }
@@ -205,12 +205,21 @@ func GzipFast(a *[]byte) []byte {
 	gz.Flush()
 	return b.Bytes()
 }
+
+var ProxyTench *httputil.ReverseProxy
+
 func CreateProxy(target string) *httputil.ReverseProxy {
+
 	proxy_addr, err := url.Parse(target)
 	if err != nil {
 		fmt.Println(err)
 	}
+	// if ProxyTench != nil {
+	// 	proxy = ProxyTench
+	// } else {
 	proxy := httputil.NewSingleHostReverseProxy(proxy_addr)
+	// 	ProxyTench = proxy
+	// }
 	proxy.Director = func(request *http.Request) {
 		targetQuery := proxy_addr.RawQuery
 		//这里只选择两种压缩方式 方便兼容
@@ -232,13 +241,10 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		if request.Method == "POST" {
 			fmt.Println(GetFormData(request))
 		}
-		fmt.Println(request.RemoteAddr)
+		fmt.Println(request.Host)
 		fmt.Println(path + "\n\n")
-
 	}
-
 	// http.Get(url string)
-
 	proxy.ModifyResponse = func(response *http.Response) error {
 		// fmt.Println(path.Ext(response.Request.RequestURI), "后缀")
 		ioReader, err := switchContentEncoding(response)
@@ -274,6 +280,7 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 		}
 		// fmt.Println(*(*string)(unsafe.Pointer(&body)), "解析数据")
 		body = GzipFast(&body)
+		response.Header.Set("Cache-Control", "max-age=31536000")
 		response.Header["Content-Encoding"] = []string{"gzip"}
 		response.Body = ioutil.NopCloser(bytes.NewReader(body))
 		response.ContentLength = int64(len(body))
@@ -282,6 +289,7 @@ func CreateProxy(target string) *httputil.ReverseProxy {
 	}
 	return proxy
 }
+
 func Proxy(proxy *httputil.ReverseProxy) http.HandlerFunc {
 	fmt.Println("执行代理函数")
 	fmt.Println(Before_params)
@@ -310,12 +318,7 @@ func FileNewServer(dir http.Dir) *http.Client {
 
 func main() {
 	// SetFormParams()
-	//1.获取需要运行的代理url
-	//2.运行代理
-	//3.插入脚本
-	//4.执行脚本
-
-	proxy := CreateProxy("https://v.qq.com")
+	proxy := CreateProxy("https://www.youku.com")
 	mux := http.NewServeMux()
 	mux.HandleFunc("/proxyData", ResultData)
 	mux.HandleFunc("/setData", func(w http.ResponseWriter, r *http.Request) {
@@ -373,7 +376,14 @@ func main() {
 		Addr:    ":8081",
 		Handler: mux,
 	}
-
+	// server2 := &http.Server{
+	// 	Addr:    ":8080",
+	// 	Handler: mux,
+	// }
+	// if err := server2.ListenAndServe(); err != nil {
+	// 	log.Fatal(err)
+	// }
+	// server.Shutdown(context.Background())
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatal(err)
 	}

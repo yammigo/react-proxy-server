@@ -11,7 +11,7 @@ module.exports = merge(baseconfig, {
     mode: "production",
     module: {
         rules: [{
-                test: /\.(scss|css|sass)$/,
+                test: /\.css$/,
                 use: [{
                     loader: MiniCssExtractPlugin.loader
                 }, {
@@ -19,10 +19,35 @@ module.exports = merge(baseconfig, {
                     options: {
                         esModule: false,
                     }
+                }, { loader: "postcss-loader" }, ],
+            },
+
+            {
+                test: /\.(scss|sass)$/,
+                use: [{
+                        loader: MiniCssExtractPlugin.loader
+                    }, {
+                        loader: "css-loader",
+                        options: {
+                            esModule: false,
+                        }
+                    }, { loader: "postcss-loader" },
+                    {
+                        loader: "sass-loader",
+                    }
+                ]
+            },
+            {
+                test: /\.(.less)$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader
                 }, {
-                    loader: "postcss-loader",
-                }, {
-                    loader: "sass-loader",
+                    loader: "css-loader",
+                    options: {
+                        esModule: false,
+                    }
+                }, { loader: "postcss-loader" }, {
+                    loader: "less-loader",
                 }]
             },
             {

@@ -55,9 +55,28 @@ const babelConfig = {
             {
                 "libraryName": "@icon-park/react",
                 "libraryDirectory": "es/icons",
-                "camel2DashComponentName": false 
-            }
+                "camel2DashComponentName": false
+            },
+            "icon-park"
         ],
+        [
+            'import',
+            {
+                "libraryName": '@arco-design/web-react',
+                "libraryDirectory": 'es',
+                "camel2DashComponentName": false,
+                "style": true, // 样式按需加载
+            },
+            "arco-design"
+        ],
+        // [
+        //     'babel-plugin-import',
+        //     {
+        //         libraryName: '@arco-design/web-react/icon',
+        //         libraryDirectory: 'react-icon',
+        //         camel2DashComponentName: false,
+        //     },
+        // ],
         ...envplugins()
     ]
 }

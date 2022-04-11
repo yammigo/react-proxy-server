@@ -8,19 +8,55 @@ module.exports = merge(baseconfig, {
     devtool: 'source-map',
     module: {
         rules: [{
-                test: /\.(scss|css|sass)$/,
+                test: /\.css$/i,
                 use: [{
-                    loader: "style-loader"
-                }, {
-                    loader: "css-loader",
-                    options: {
-                        esModule: false,
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "postcss-loader",
+                    },
+                ]
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: [{
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            esModule: false,
+                        }
+                    },
+                    {
+                        loader: "postcss-loader",
+                    },
+
+                    {
+                        loader: "sass-loader",
                     }
-                }, {
-                    loader: "postcss-loader",
-                }, {
-                    loader: "sass-loader",
-                }]
+                ]
+            },
+            {
+                test: /\.less$/,
+                use: [{
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            esModule: false,
+                        }
+                    },
+                    {
+                        loader: "postcss-loader",
+                    },
+
+                    {
+                        loader: "less-loader",
+                    },
+
+                ]
             },
             {
                 test: /.(js|ts|jsx|tsx)$/,
