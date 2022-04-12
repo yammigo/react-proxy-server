@@ -35,7 +35,6 @@ func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 	} else {
 		return "", bodyMap, r.URL.Query()
 	}
-
 }
 
 func SetFormParams() {
