@@ -1,6 +1,6 @@
 {
     "en": {
-        "butrun": "run server",
+        "butrun": "run server Proxy",
         "proxyInput": "proxy host",
         "proxyFolder": "static folder",
         "requerHeader": "request headers",
@@ -17,7 +17,7 @@
         "addScript": "add script"
     },
     "zh_cn": {
-        "butrun": "运行服务",
+        "butrun": "添加代理",
         "proxyFolder": "静态目录",
         "requerHeader": "请求头",
         "proxyInput": "代理地址",

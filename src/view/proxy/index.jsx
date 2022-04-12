@@ -75,7 +75,7 @@ const Proxy = ()=>{
          <div className=" flex items-center absolute right-2"><ThemCom></ThemCom> <Lang></Lang></div>
        </NavBar>
        <div className="p-4 min-w-0 block w-min-md whitespace-nowrap w-full overflow-auto min-h-screen pt-20">
-           <Alert content='Here is an example text' />
+           <Alert content='欢迎使用 vg_proxy' />
            <Hostcom></Hostcom>
            {/* <div className="mt-6 whitespace-nowrap relative">
                <label className=" inline-block w-40"></label>
