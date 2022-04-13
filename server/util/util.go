@@ -38,7 +38,6 @@ func GetFormData(r *http.Request) (string, map[string]interface{}, url.Values) {
 }
 
 func SetFormParams() {
-
 	// contentType := r.Header["Content-Type"]
 	// fmt.Println(bodyMap)
 	// if len(contentType) > 0 {
@@ -221,4 +220,5 @@ func FileNewServer(dir http.Dir) *http.Client {
 	// r, _ := ioutil.ReadAll(res.Body)
 	// fmt.Println(string(r))
 	return c
+
 }
