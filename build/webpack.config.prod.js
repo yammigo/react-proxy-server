@@ -38,7 +38,7 @@ module.exports = merge(baseconfig, {
                 ]
             },
             {
-                test: /\.(.less)$/,
+                test: /\.less$/,
                 use: [{
                     loader: MiniCssExtractPlugin.loader
                 }, {
